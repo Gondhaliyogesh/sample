@@ -11,34 +11,32 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
-import com.sample.Homepage;
-
 public class LoginPage 
 {
 	WebDriver driver;
-	
+
 	Homepage homepage;
 	@BeforeSuite
 	public void start() throws MalformedURLException
 	{
-	
-	String username = System.getenv("BROWSERSTACK_USER");
-	String accessKey = System.getenv("BROWSERSTACK_ACCESSKEY");
-	String browserstackLocal = System.getenv("BROWSERSTACK_LOCAL");
-	String browserstackLocalIdentifier = System.getenv("BROWSERSTACK_LOCAL_IDENTIFIER");
-	 
-	DesiredCapabilities capabilities = new DesiredCapabilities();
-	capabilities.setCapability("os", "Windows");
-	capabilities.setCapability("browser", "chrome");
-	capabilities.setCapability("browserstack.local", browserstackLocal);
-	capabilities.setCapability("browserstack.localIdentifier", browserstackLocalIdentifier);
-	driver = new RemoteWebDriver(new URL("https://" + username + ":" + accessKey + "@hub.browserstack.com/wd/hub"), capabilities);
 
-	driver.manage().window().maximize();
-    driver.manage().deleteAllCookies();
+		String username = System.getenv("BROWSERSTACK_USER");
+		String accessKey = System.getenv("BROWSERSTACK_ACCESSKEY");
+		String browserstackLocal = System.getenv("BROWSERSTACK_LOCAL");
+		String browserstackLocalIdentifier = System.getenv("BROWSERSTACK_LOCAL_IDENTIFIER");
 
-    driver.get("http://pcsv2dev.azurewebsites.net/#/");
-	
+		DesiredCapabilities capabilities = new DesiredCapabilities();
+		capabilities.setCapability("os", "Windows");
+		capabilities.setCapability("browser", "chrome");
+		capabilities.setCapability("browserstack.local", browserstackLocal);
+		capabilities.setCapability("browserstack.localIdentifier", browserstackLocalIdentifier);
+		driver = new RemoteWebDriver(new URL("https://" + username + ":" + accessKey + "@hub.browserstack.com/wd/hub"), capabilities);
+
+		driver.manage().window().maximize();
+		driver.manage().deleteAllCookies();
+
+		driver.get("http://pcsv2dev.azurewebsites.net/#/");
+
 	}
 	@Test(priority=2)
 	public void Login() throws Exception 
@@ -87,7 +85,6 @@ public class LoginPage
 		Thread.sleep(3000);
 
 		driver.close();
-		//recorder.stop();
 	}
 
 }
